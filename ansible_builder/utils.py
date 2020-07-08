@@ -32,7 +32,11 @@ def introspect():
         # add debug statements at points like this
         return paths
     for namespace in sorted(os.listdir(path_root)):
+        if not os.path.isdir(os.path.join(path_root, namespace)):
+            continue
         for name in sorted(os.listdir(os.path.join(path_root, namespace))):
+            if not os.path.isdir(os.path.join(path_root, namespace, name)):
+                continue
             collection_dir = os.path.join(path_root, namespace, name)
             files_list = os.listdir(collection_dir)
             if 'galaxy.yml' in files_list or 'MANIFEST.json' in files_list:
